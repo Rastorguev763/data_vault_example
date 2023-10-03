@@ -1,0 +1,123 @@
+@startuml
+!define ENTITY(x) entity "x" as x << (E, #FFAAAA) >>
+!define RELATION(x) entity "x" as x << (R, #AAFFAA) >>
+
+!define HUB(x) entity "x" as x << (H, #FFFFAA) >>
+!define LINK(x) entity "x" as x << (L, #AAAAFF) >>
+!define SATELLITE(x) entity "x" as x << (S, #FFAAAA) >>
+
+HUB(Hub_Products) {
+  + ProductID (PK)
+  ProductName
+  BrandID (FK)
+  ModelID (FK)
+  CategoryID (FK)
+}
+
+HUB(Hub_Customers) {
+  + CustomerID (PK)
+  AccountID (FK)
+  FullName
+  Gender
+  DateOfBirth
+  Email
+  Phone
+}
+
+HUB(Hub_Brands) {
+  + BrandID (PK)
+  Brand
+}
+
+HUB(Hub_Models) {
+  + ModelID (PK)
+  Model
+}
+
+HUB(Hub_Categories) {
+  + CategoryID (PK)
+  Category
+}
+
+LINK(Link_Sales_Products) {
+  + SaleProductID (PK)
+  ProductID (FK)
+  SaleID (FK)
+}
+
+LINK(Link_Sales_Customers) {
+  + SaleCustomerID (PK)
+  CustomerID (FK)
+  SaleID (FK)
+}
+
+LINK(Link_Products_Brands) {
+  + ProductBrandID (PK)
+  ProductID (FK)
+  BrandID (FK)
+}
+
+LINK(Link_Products_Models) {
+  + ProductModelID (PK)
+  ProductID (FK)
+  ModelID (FK)
+}
+
+LINK(Link_Products_Categories) {
+  + ProductCategoryID (PK)
+  ProductID (FK)
+  CategoryID (FK)
+}
+
+SATELLITE(Satellite_Products) {
+  + ProductSatelliteID (PK)
+  ProductID (FK)
+  ProductName
+  ValidFrom
+  ValidTo
+}
+
+SATELLITE(Satellite_Customers) {
+  + CustomerSatelliteID (PK)
+  CustomerID (FK)
+  Gender
+  DateOfBirth
+  ValidFrom
+  ValidTo
+}
+
+SATELLITE(Satellite_Brands) {
+  + BrandSatelliteID (PK)
+  BrandID (FK)
+  Brand
+  ValidFrom
+  ValidTo
+}
+
+SATELLITE(Satellite_Models) {
+  + ModelSatelliteID (PK)
+  ModelID (FK)
+  Model
+  ValidFrom
+  ValidTo
+}
+
+SATELLITE(Satellite_Categories) {
+  + CategorySatelliteID (PK)
+  CategoryID (FK)
+  Category
+  ValidFrom
+  ValidTo
+}
+
+SATELLITE(Satellite_Sales) {
+  + SaleSatelliteID (PK)
+  SaleID (FK)
+  OrderID
+  SaleTime
+  TotalAmount
+  ValidFrom
+  ValidTo
+}
+
+@enduml
